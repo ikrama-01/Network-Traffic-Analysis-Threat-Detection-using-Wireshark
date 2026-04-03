@@ -90,6 +90,12 @@ nmap scanme.nmap.org
 * SYN-ACK (open ports) vs RST (closed ports)
 * Incomplete TCP handshake
 
+**Detection Logic:**
+**Port Scan**
+* Multiple SYN packets from single source
+* Different destination ports
+* No handshake completion
+
 **Analysis:**
 Multiple SYN packets across ports indicate a SYN scan used to identify open services.
 
@@ -107,6 +113,12 @@ nslookup verylongrandomstringexampletestdomain123456.com
 
 * Long and random domain names
 * Repeated DNS queries
+* NXDOMAIN responses
+
+**Detection Logic:**
+**DNS Tunneling**
+* Long/random domain names
+* Repeated queries
 * NXDOMAIN responses
 
 **Analysis:**
@@ -127,6 +139,12 @@ hping3 -S --flood --rand-source -p 80 <target-ip>
 * Extremely high volume of SYN packets
 * Random source IPs (spoofed)
 * No TCP handshake completion
+
+**Detection Logic:**
+**SYN Flood**
+* High rate of SYN packets
+* Random source IPs
+* Half-open connections
 
 **Analysis:**
 Indicates a SYN flood attack where half-open connections exhaust server resources.
